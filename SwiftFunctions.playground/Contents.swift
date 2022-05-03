@@ -104,3 +104,115 @@ print(minMax(array: [2,3,41,21,09]))
 
 var p = myFunc3(movie: "Interstellar", year: 2014)
 print(p.m, "was released in the year", p.y)
+
+
+
+
+//“Optional Tuple Return Types
+
+//If the tuple type to be returned from a function has the potential to have “no value” for the entire tuple, you can use an optional tuple return type to reflect the fact that the entire tuple can be nil. You write an optional tuple return type by placing a question mark after the tuple type’s closing parenthesis, such as (Int, Int)? or (String, Int, Bool)?.”
+
+func minMaximum(array: [Int]) -> (min: Int, max: Int)?{
+    if array.isEmpty{
+        print("You have inserted an empty as an input.")
+        return nil
+    }
+    
+    if array.count == 1{
+        print("comparison not possible as there is only one item.")
+        return nil
+    
+    }
+    var currentMin = array[0]
+    var currentMax = array[0]
+    
+    for i in array[1..<array.count]{
+        if i < currentMin{
+            currentMin = i
+        }
+        else if i > currentMax{
+            currentMax = i
+        }
+    }
+    return(currentMin,currentMax)
+}
+
+print(minMaximum(array: []))
+
+var h: Int?
+print(h)
+
+//“You can use optional binding to check whether this version of the minMax(array:) function returns an actual tuple value or nil:”
+
+if let mM = minMaximum(array: [2,3,4,1]){
+    print("min number is \(mM.min) and max number is \(mM.max)")
+}
+
+if let a = minMaximum(array: []){
+    print("min number is \(a.min) and max number is \(a.max)")
+}
+
+
+
+
+//“Functions With an Implicit Return
+//If the entire body of the function is a single expression, the function implicitly returns that expression. For example, both functions below have the same behavior:
+
+func myFunc4(n:Int) -> String{
+    return "You typed \(n)."
+}
+
+print(myFunc4(n: 4))
+
+func myFunc5(n:Int) -> String{
+    "You typed \(n)."
+}
+
+print(myFunc5(n: 5))
+//“ Any function that you write as just one return line can omit the return.”
+
+
+//“NOTE
+//The code you write as an implicit return value needs to return some value. For example, you can’t use print(13) as an implicit return value. However, you can use a function that never returns like fatalError("Oh no!") as an implicit return value, because Swift knows that the implicit return doesn’t happen.”
+
+//Function Argument Labels and Parameter Names
+//Each function parameter has both an argument label and a parameter name. The argument label is used when calling the function; each argument is written in the function call with its argument label before it. The parameter name is used in the implementation of the function. By default, parameters use their parameter name as their argument label.”
+
+
+//“All parameters must have unique names. Although it’s possible for multiple parameters to have the same argument label, unique argument labels help make your code more readable.”
+
+
+
+//Specifying Argument Labels
+//You write an argument label before the parameter name, separated by a space:
+
+func myFunc6(argumentLabel parameterName: Int){
+    print(parameterName)
+}
+
+myFunc6(argumentLabel: 90) //while calling a fuction, argument label is used.
+
+
+
+
+//“Omitting Argument Labels
+//If you don’t want an argument label for a parameter, write an underscore (_) instead of an explicit argument label for that parameter.”
+
+func myFunc7(_ parameterName: Int){
+    print(parameterName)
+}
+
+myFunc7(89)
+
+//“Default Parameter Values
+//You can define a default value for any parameter in a function by assigning a value to the parameter after that parameter’s type. If a default value is defined, you can omit that parameter when calling the function.”
+
+func myFunc8(noDefaultValue: Int, defaultValue: Int = 27){
+    print("Parameter without default value is: \(noDefaultValue)\nParameter with default value is: \(defaultValue)")
+}
+
+myFunc8(noDefaultValue: 56)
+
+//you can also assign a value to the parameter with a default value.
+myFunc8(noDefaultValue: 56,defaultValue: 77)
+
